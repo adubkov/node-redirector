@@ -1,0 +1,11 @@
+{
+	"lang":"ru",
+    "title": "get.io v0.1 бета",
+    "project_name":"get.io",
+    "jumbo_h1":"Получить короткий URL",
+    "jumbo_p":"Введите ваш URL в поле ниже, что бы получить короткий URL.",
+    "about":"О проекте",
+    "contact":"Контакты",
+    "you_url":"Ваш URL",
+    "submit":"Укороти его!"
+}

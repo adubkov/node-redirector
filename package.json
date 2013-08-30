@@ -1,0 +1,26 @@
+{
+  "author": {
+    "name": "Alexey Dubkov",
+    "email": "alexey@dubkov.com",
+    "url": "http://github.com/blacked"
+  },
+  "contributors": {},
+  "dependencies": {
+    "jade": "0.34.x",
+    "mime": "1.2.x",
+    "underscore": "1.5.x"
+  },
+  "description": "Open-source tinyurl-like engine.",
+  "main": "redirector.js",
+  "name": "redirector",
+  "repository": {
+    "url": "https://github.com/blacked/node-redirect",
+    "type": "git"
+  },
+  "version": "0.1.0",
+  "readme": "",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/blacked/node-redirect/issues"
+  }
+}

@@ -1,0 +1,42 @@
+!!! 5
+html(lang='#{lang}')
+head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title #{title}
+    link(rel='stylesheet', href='./css/bootstrap.min.css')
+    link(rel='stylesheet', href='./css/main.css')
+    link(rel='shortcut icon', href='./images/favicon.png')
+  body
+    .container
+      .row
+        .col-sm-12.col-md-8.col-md-offset-2
+          .header
+            ul.nav.nav-pills.pull-right
+              li
+                a(href='#') #{about}
+              li
+                a(href='#') #{contact}
+            h1.text-muted #{project_name}
+      .row
+        .col-sm-12.col-md-8.col-md-offset-2
+          #doneUrl.alert.alert-success.text-center
+            h1 Your short URL is:
+            h2#resultUrl
+              a(href='http://get.io/2JJJJ', target='_blank')
+            a#showAddUrl.btn.btn-primary.btn-lg.btn-block(href='#') Get another one!        
+          #addUrl.jumbotron
+            h1 #{jumbo_h1}
+            p.lead #{jumbo_p}
+            form#addUrlForm(name='addUrlForm', role='form')
+              .form-group
+                label(for='target_url') #{you_url}:
+                input#url.form-control(type='url', placeholder='http://mydomain.com/?parameter1=value1&parameter2=value2')
+              button#submitUrl.btn.btn-lg.btn-success.btn-block(type='button') #{submit}
+      if debug 
+        .alert.alert-warning #{debug}
+    script(src='./js/jquery.min.js')
+    script(src='./js/bootstrap.min.js')
+    script(src='./js/main.js')
