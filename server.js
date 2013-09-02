@@ -26,7 +26,7 @@ var _ = require('underscore');
 var redirectHandler = require('./redirectHandler');
 
 var protocol = 'http://';		// Host protocol
-var host = '192.168.0.2';		// Host address
+var host = '127.0.0.1';		// Host address
 var port = 8888;				// HTTP port
 
 /**
@@ -78,7 +78,8 @@ function loadDumpUrls() {
 				if (err) {
 					var headers = {'Content-Type':'text/plain'};
 					console.log('loadDumpUrls: [' + file + ']\t ERROR');
-				} else {
+				} else 
+				if (!_.isEmpty(data)) {
 					// decode JSON @data to @urls
 					urls = JSON.parse(data);
 					console.log('loadDumpUrls: [' + file + ']\t OK');
@@ -113,7 +114,8 @@ exports.start = function start(route) {
 	*/	
 	function onRequest(req, res) {
 		var pathname = url.parse(req.url).pathname;
-		//console.log('\nRequest for ' + pathname);
+		process.env['DEBUG'] ? console.log('\nRequest for ' + pathname):'';
+		// Route request to appropriate handler
 		route(req, res, pathname, urls);
 	}
 

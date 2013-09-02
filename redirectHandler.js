@@ -21,5 +21,5 @@
 exports.get = function(req, res, redirect) {
 	res.writeHead(301, {'Location':redirect.url});
 	res.end();
-	//console.log('REDIRECT TO ' + redirect.url);
+	process.env['DEBUG'] ? console.log('redirectHandler: [' + redirect.url + ']'):'';
 }

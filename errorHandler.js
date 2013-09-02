@@ -21,5 +21,5 @@
 exports.get = function(req, res, error) {
 	res.writeHead(error, {'Content-Type':'text/plain'});
 	res.end();
-	//console.log('errorHandler: 404');
+	process.env['DEBUG'] ? console.log('errorHandler: 404'):'';
 }

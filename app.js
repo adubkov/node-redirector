@@ -21,6 +21,8 @@
 var server = require('./server');
 var route = require('./router').route;
 
+process.env['DEBUG'] = 'true';
+
 /**
 * Starts the Server
 */

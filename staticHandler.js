@@ -24,18 +24,19 @@ var mime = require('mime');
 
 exports.get = function(req, res, pathname) {
 
-	fs.readFile(__dirname + '/static' + pathname, 'utf8', function(err, data){
+	var file = __dirname + '/static' + pathname;
+	fs.readFile(file, 'utf8', function(err, data){
 		if (err) {
 			var headers = {'Content-Type':'text/plain'}
 			res.writeHead(404, headers);
 			res.end(pathname + ' not found');
-			//console.log(__dirname + '/static' + pathname + '\t 404');
+			process.env['DEBUG'] ? console.log(__dirname + '/static' + pathname + '\t 404'):'';
 		} else {
 		    var mimeType = mime.lookup(pathname);
 		    var headers = {'Content-Type':mimeType, 'Content-Length':data.length}
 			res.writeHead(200, headers);
 			res.end(data);
-			//console.log(pathname + '\t 200');			
+			process.env['DEBUG'] ? console.log(pathname + '\t 200'):'';
 		}
 	});
 	

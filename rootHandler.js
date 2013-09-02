@@ -99,13 +99,13 @@ function getNewKey(arr){
     /*var arr = test_arr.sort();
     console.log(arr);
     console.log('Size: ' + _.size(arr));*/
-
+    process.env['DEBUG'] ? console.log('getNewKey: [' + new_key + '];\tTotal keys: ' + _.size(arr)):'';
     return new_key;
 };
 
 exports.get = function(req, res, next) {
     loadLanguageResource(req, res, 'index');
-	//console.log('GET');
+	process.env['DEBUG'] ? console.log('GET /'):'';
 }
 
 exports.post = function(req, res, next, urls) {
@@ -126,5 +126,5 @@ exports.post = function(req, res, next, urls) {
             res.writeHead('500', headers);
             res.end();            
         }
-    //console.log('POST '+ req.post.url +' '+ JSON.stringify({url: idx_hash}));
+    process.env['DEBUG'] ? console.log('POST '+ req.post.url +' '+ JSON.stringify({url: idx_hash})):'';
 }
