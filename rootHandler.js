@@ -20,42 +20,10 @@
 
 var fs = require('fs');
 var sys = require('sys');
-
-var _ = require('underscore');
-
 var view = require('./view');
 var redirectHandler = require('./redirectHandler');
 
 var test_arr = [];
-
-function getClientLanguage(req_headers) {
-    var lang = 'en';
-    if (_.isObject(req_headers["accept-language"])) {
-        if (req_headers["accept-language"].indexOf('ru') != -1) {
-            lang = 'ru';
-        }
-    }
-    return lang;
-}
-
-function loadLanguageResource(req, res, viewName, addLocals) {
-    var lang = getClientLanguage(req.headers);
-
-    fs.readFile(__dirname +'/views/'+ viewName +'/'+ lang +'.json', 'utf8', function(err, data){
-        if (err) {
-            var headers = {'Content-Type':'text/plain'}
-            res.writeHead(404, headers);
-            res.end(pathname + ' not found');
-            console.log(__dirname + '/views/'+ viewName +'/'+ lang +'.json' + '\t 404');
-        } else {
-            var locals = JSON.parse(data);
-            if (_.isObject(addLocals)) {
-                locals = _.extend(locals, addLocals);
-            }
-            view.view(viewName, locals, res);       
-        }
-    });
-}
 
 function base_encode(num) {
     if (typeof num !== 'number') num = parseInt(num);
@@ -103,8 +71,15 @@ function getNewKey(arr){
     return new_key;
 };
 
+/**
+* GET handler for root path
+* @name get
+* @param {Object} req Request object
+* @param {Object} res Response object
+* @param {Object} next.
+*/
 exports.get = function(req, res, next) {
-    loadLanguageResource(req, res, 'index');
+    view.show(req, res, 'index', 'index');
 	process.env['DEBUG'] ? console.log('GET /'):'';
 }
 

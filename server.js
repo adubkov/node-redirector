@@ -21,9 +21,8 @@
 var http = require('http');
 var url = require('url');
 var fs = require('fs');
-var _ = require('underscore');
-
 var redirectHandler = require('./redirectHandler');
+
 
 var protocol = 'http://';		// Host protocol
 var host = '127.0.0.1';		// Host address
@@ -57,7 +56,7 @@ function saveDumpUrls(arr) {
     var data = JSON.stringify(arr);
     // async write @data in @file
     fs.writeFile(file, data, 'utf8', function (err) {
-        if (err) console.log('saveDumpUrls: ['+ file +']\t ERROR');
+    	err ? console.log('saveDumpUrls: [' + file + ']\tERROR\n' + err) : NaN;
         console.log('saveDumpUrls: ['+ file +']\t OK');
         console.log('\t\t' + _.size(arr) + ' records was saved');
     });
@@ -70,6 +69,7 @@ function saveDumpUrls(arr) {
 function loadDumpUrls() {
 	// define file to load
 	var file = __dirname + '/data/urls.dat';
+	
 	// if @file exist then
 	fs.exists(file, function (exists) {
 		if (exists) {
@@ -99,10 +99,11 @@ function loadDumpUrls() {
 /**
 * Start HTTP server
 * @name start
-* @route {function} route Router function
+* @route {Function} route Router function
 */
 exports.start = function start(route) {
 
+	// Load dump urls from disk
 	loadDumpUrls();
 
 	/**
@@ -113,7 +114,8 @@ exports.start = function start(route) {
 	* @param {Object} res Response object
 	*/	
 	function onRequest(req, res) {
-		var pathname = url.parse(req.url).pathname;
+		var pathname = req.pathname = url.parse(req.url).pathname;
+		// DEBUG
 		process.env['DEBUG'] ? console.log('\nRequest for ' + pathname):'';
 		// Route request to appropriate handler
 		route(req, res, pathname, urls);

@@ -1,1 +1,5 @@
 #doneUrl { display: none; }
+#err { margin-top: 20px; }
+#err .err-code { display: inline; padding: 0px 24px 0px 10px; font-size: 63px; line-height: 63px; }
+#err .err-msg { display: inline; font-size: 21px; vertical-align: top; }
+.selected { background-color: #2a6496; color: white; }

@@ -1,5 +1,8 @@
 $(document).ready(function (){
 
+	if ($('#errClose')[0]) {
+		$("#addUrl").hide();
+	}
 	/** 
 	*
 	*/
@@ -14,12 +17,16 @@ $(document).ready(function (){
 			});
 		});
 	}
-	$("#showAddUrl").click(function(){
+
+	function showAddUrl() {
 		$("#url").val('');
 		$("#addUrl").show(0,function(){
 			$("#doneUrl").hide();
+			$("#err").hide();
 		});
-	});
+	}
+
+	$("#showAddUrl").click(showAddUrl);
 
 	$("#submitUrl").click(submit);
 
@@ -29,4 +36,14 @@ $(document).ready(function (){
   			submit();
   		}
 	});
+
+	$("#errClose").click(showAddUrl);
+	
+	$(document).keyup(function(e) {
+		if (e.keyCode == 27) {
+	  		e.preventDefault();
+	  		showAddUrl();
+		}
+	});
+
 });

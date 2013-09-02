@@ -18,8 +18,13 @@
 *
 */
 
-exports.get = function(req, res, error) {
-	res.writeHead(error, {'Content-Type':'text/plain'});
-	res.end();
-	process.env['DEBUG'] ? console.log('errorHandler: 404'):'';
+var view = require('./view');
+
+exports.get = function(req, res, err) {
+	// DEBUG
+	process.env['DEBUG'] ? console.log('errorHandler: ' + err.err_code + '\n MSG: ' + err.err_msg):'';
+
+	// Respond to client
+	err.err_msg = 'We\'re sorry, but shit happened :(\nWe logged it, and hope to fix it soon!';
+	view.show(req, res, 'error', 'index', err);
 }

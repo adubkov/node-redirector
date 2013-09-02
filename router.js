@@ -20,8 +20,6 @@
 
 var sys = require('sys');
 var qs = require('querystring');
-var _ = require('underscore');
-
 var redirectHandler = require('./redirectHandler');
 var rootHandler = require('./rootHandler');
 var errorHandler = require('./errorHandler');
@@ -86,21 +84,23 @@ exports.route = function route(req, res, pathname, urls) {
 					urls[pathname].on(req, res, urls[pathname]);
 				} else {
 					// if @urls[hash] isn't a function
-					res.writeHead(500, {'Content-Type':'text/plain'});
-					res.end('We\'re sorry, but shit happened :(\nWe logged it, and hope to fix it soon!');		
-					console.log('urls[' + pathname + '].on isn\'t a Function\t ERROR');
+					errorHandler.get(req, res, {
+						err_code:500,
+						err_msg:'Urls[' + pathname + '].on isn\'t a Function\t ERROR'
+					});
 				}
 			} else {
 				// if @urls[hash] hasn't ".on" function
-				res.writeHead(500, {'Content-Type':'text/plain'});
-				res.end('We\'re sorry, but shit happened :(\nWe logged it, and hope to fix it soon!');		
-				console.log('Seems like urls[' + pathname + '] hasn\'t function \'.on\' \t ERROR');
+				errorHandler.get(req, res, {
+					err_code:500,
+					err_msg:'Seems like urls[' + pathname + '] hasn\'t function \'.on\' \t ERROR'
+				});
 			}
 		} else {
 			// if we haven't apropriate request handler, then return HTTP error 404
-			errorHandler.get(req, res, 404);
+			errorHandler.get(req, res, {err_code:404, err_msg:'Could not find apropriate handler for: ' + pathname});
 		}
 	} else
 		// @urls is empty, nothing to respond
-		errorHandler.get(req, res, 404);
+		errorHandler.get(req, res, {err_code:404, err_msg:'Urls is empty, nothing to respond ['+ pathname +']'});
 }
