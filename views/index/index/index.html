@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>get.io v0.1 beta</title>
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.css">
+	<link rel="stylesheet" href="../../static/css/main.css">
+	<link rel="shortcut icon" href="./images/favicon.png">
+</head>
+<body>
+	<div class="container">
+
+		<div class="row">
+			<div class="col-sm-12 col-md-8 col-md-offset-2">
+				<div class="header">
+					<ul class="nav nav-pills pull-right">
+						<li class="active"><a href="#">About</a></li>
+						<li><a href="#">Contact</a></li>
+					</ul>
+					<h1 class="text-muted">get.io</h1>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12 col-md-8 col-md-offset-2">
+				<div id="doneUrl" class="alert alert-success text-center">
+					<h1>Your short URL is:</h1>
+					<h2 id="resultUrl"><a href="http://get.io/2JJJJ" target="_blank">http://get.io/2JJJJ</a></h2>
+					<a id="showAddUrl" href="#" class="btn btn-primary btn-lg btn-block">Get another one!</a>
+				</div>
+
+				<div id="addUrl" class="jumbotron">
+					<h1>Get short URL</h1>
+					<p class="lead">Enter your URL into input below, to get shorter URL.</p>
+					<form name="addUrlForm" id="addUrlForm" role="form">
+						<div class="form-group">
+							<label for="target_url">Your URL:</label>
+							<input id="url" type="url" class="form-control" placeholder="http://mydomain.com/?parameter1=value1&parameter2=value2">
+						</div>
+						<button id="submitUrl" type="button" class="btn btn-lg btn-success btn-block">Short It!</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="alert alert-warning">{ debug info }</div>
+
+	</div>
+	
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function (){
+		$("#showAddUrl").click(function(){
+  			$("#addUrl").show(0,function(){
+  				
+  			});
+  			$("#doneUrl").hide();
+  		});
+		
+        //console.log("<p>item1="+data.item1+" item2="+data.item2+" item3="+data.item3+"</p>");
+		//alert("Response: "+JSON.stringify(res));
+		$("#submitUrl").click(function(){
+
+			$.post('http://192.168.0.2:8888/', {url:$("#url").val()}, function(res) {
+				alert("success");
+			}, 'json')
+			.done(function() { alert("second success"); })
+			.fail(function (xhr, ajaxOptions, thrownError) {
+        		alert(xhr.status + ' ' + ajaxOptions);
+       		})
+			.always(function() { });
+
+			$("#doneUrl").show(0,function(){
+				
+			});
+			$("#addUrl").hide();
+		});
+	});
+	</script>
+
+</body>
+</html>
