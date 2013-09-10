@@ -39,7 +39,7 @@ exports.get = function(req, res, pathname) {
 			res.writeHead(404, headers);
 			res.end(pathname + ' not found');
 			// DEBUG
-			process.env['DEBUG'] ? console.log(__dirname + '/static' + pathname + '\t 404'):'';
+			process.env['DEBUG'] && console.log(__dirname + '/static' + pathname + '\t 404');
 		} else {
 			// detect mime-type
 		    var mimeType = mime.lookup(pathname);
@@ -48,7 +48,7 @@ exports.get = function(req, res, pathname) {
 			res.writeHead(200, headers);
 			res.end(data);
 			// DEBUG
-			process.env['DEBUG'] ? console.log(pathname + '\t 200'):'';
+			process.env['DEBUG'] && console.log(pathname + '\t 200');
 		}
 	});
 	

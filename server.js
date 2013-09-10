@@ -56,7 +56,7 @@ function saveDumpUrls(arr) {
     var data = JSON.stringify(arr);
     // async write @data in @file
     fs.writeFile(file, data, 'utf8', function (err) {
-    	err ? console.log('saveDumpUrls: [' + file + ']\tERROR\n' + err) : NaN;
+    	err && console.log('saveDumpUrls: [' + file + ']\tERROR\n' + err);
         console.log('saveDumpUrls: ['+ file +']\t OK');
         console.log('\t\t' + _.size(arr) + ' records was saved');
     });
@@ -116,7 +116,7 @@ exports.start = function start(route) {
 	function onRequest(req, res) {
 		var pathname = req.pathname = url.parse(req.url).pathname;
 		// DEBUG
-		process.env['DEBUG'] ? console.log('\nRequest for ' + pathname):'';
+		process.env['DEBUG'] && console.log('\nRequest for ' + pathname);
 		// Route request to appropriate handler
 		route(req, res, pathname, urls);
 	}

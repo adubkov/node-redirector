@@ -27,7 +27,7 @@ var route = require('./router').route;
 /**
 * Uncomment for debug logging
 */
-// process.env['DEBUG'] = 'true';
+ process.env['DEBUG'] = 'true';
 
 /**
 * Starts the Server
