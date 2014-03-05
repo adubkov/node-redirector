@@ -29,3 +29,5 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ```
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/5d92bc844dc56e40e1abae44ad95db9e "githalytics.com")](http://githalytics.com/blacked/node-redirector)
